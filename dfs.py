@@ -11,7 +11,7 @@ def dfs(current_state, end_state, stack, trace):
     print "new recursion call"
     if current_state == end_state:
         print "All disks moved"
-        break
+        
 
     possible_end_states = get_possible_end_states(current_state)
 
