@@ -25,21 +25,17 @@ def dfs(current_state, end_state, trace, level):
 
     possible_end_states = get_possible_end_states(current_state)
     if make_tuple_3d(possible_end_states).intersection(trace) == make_tuple_3d(possible_end_states):
-        # print "level", level
-        # print "State: ", current_state
-
-        # print("testing")
         return
 
     for state in possible_end_states:
         if make_tuple(state) not in trace:
             trace.add(make_tuple(state))
             dfs(state, end_state, trace, level+1)
+            print "level", level
+            print "State: ", current_state
         else:
             continue
 
-    print "level", level
-    print "State: ", current_state
     return             
 
 def get_possible_end_states(current_state):
