@@ -1,5 +1,5 @@
 import copy
-import operator
+import sys
 
 def make_tuple(state):
     a = ()
@@ -7,26 +7,39 @@ def make_tuple(state):
         a = a + (tuple(tower),)
     return a
 
-def dfs(current_state, end_state, stack, trace):
-    print "new recursion call"
+states = [[[1,2],[3],[]],[[1,2],[3],[]]]
+
+def make_tuple_3d(states):
+    a = set()
+    for state in states:
+        a.add(make_tuple(state))
+    return a
+
+def dfs(current_state, end_state, trace, level):
+    print "level", level
+    print "State: ", current_state
+
     if current_state == end_state:
         print "All disks moved"
-        
+        sys.exit()
 
     possible_end_states = get_possible_end_states(current_state)
+    if make_tuple_3d(possible_end_states).intersection(trace) == make_tuple_3d(possible_end_states):
+        # print "level", level
+        # print "State: ", current_state
+
+        # print("testing")
+        return
 
     for state in possible_end_states:
         if make_tuple(state) not in trace:
-            stack.append(state)
             trace.add(make_tuple(state))
-            print state
-            # print (trace)
-            dfs(state, end_state, stack, trace)
+            dfs(state, end_state, trace, level+1)
         else:
-            print("got in else %s", state)
             continue
 
-
+    print "level", level
+    print "State: ", current_state
     return             
 
 def get_possible_end_states(current_state):
@@ -77,12 +90,10 @@ some_state1 = [[],[3],[1,2]]
 def main(): 
     current_state = [[1,2,3],[],[]]
     end_state = [[],[],[1,2,3]]
-    stack = []
     trace = set()
-    stack.append(current_state)
     trace.add(make_tuple(current_state))
 
-    dfs(current_state, end_state, stack, trace)
+    dfs(current_state, end_state, trace, 1)
 
 def num_steps():
     return
