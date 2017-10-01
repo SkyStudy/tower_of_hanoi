@@ -1,14 +1,32 @@
 import copy
+import operator
+
+def make_tuple(state):
+    a = ()
+    for tower in state: 
+        a = a + (tuple(tower),)
+    return a
 
 def dfs(current_state, end_state, stack, trace):
+    print "new recursion call"
     if current_state == end_state:
         print "All disks moved"
-        return
+        break
 
-    stack = []
-    trace = set()
     possible_end_states = get_possible_end_states(current_state)
-    print possible_end_states
+
+    for state in possible_end_states:
+        if make_tuple(state) not in trace:
+            stack.append(state)
+            trace.add(make_tuple(state))
+            print state
+            # print (trace)
+            dfs(state, end_state, stack, trace)
+        else:
+            print("got in else %s", state)
+            continue
+
+
     return             
 
 def get_possible_end_states(current_state):
@@ -43,7 +61,6 @@ def can_move(from_t, to_t):
 
 def move(from_num, to_num, current_state):
     if can_move(current_state[from_num], current_state[to_num]) == False:
-        print ("the following move is illegal")
         return
 
     temp_state = copy.deepcopy(current_state)
@@ -56,5 +73,22 @@ current_state = [[1,2,3], [], []]
 some_state = [[1,2],[3],[]]
 some_state1 = [[],[3],[1,2]]
 
-dfs(current_state, [[],[],[]], [], set())
+
+def main(): 
+    current_state = [[1,2,3],[],[]]
+    end_state = [[],[],[1,2,3]]
+    stack = []
+    trace = set()
+    stack.append(current_state)
+    trace.add(make_tuple(current_state))
+
+    dfs(current_state, end_state, stack, trace)
+
+def num_steps():
+    return
+
+main()
+
+
+
 
