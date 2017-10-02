@@ -13,14 +13,6 @@ def make_tuple_3d(states):
         a.add(make_tuple(state))
     return a
 
-def enqueue(states, state):
-	states.insert(0, state)
-	return states
-
-def dequeue(states):
-	states.pop()
-	return states
-
 def get_possible_end_states(current_state):
     possible_end_states = []
 
@@ -36,14 +28,9 @@ def get_possible_end_states(current_state):
     return possible_end_states
 
 def bfs(current_state, end_state, trace):
-	#checks if we've moved all disks to another pole
-	print("current state", current_state)
-	if current_state == end_state:
-		print("All disks moved")
-		sys.exit()
 	queue = []
-	states = []
-	queue = enqueue(current_state)
+	queue.append(current_state)
+
 	#retrieve all possible moves 
 	possible_end_states = get_possible_end_states(current_state)
 
@@ -52,17 +39,24 @@ def bfs(current_state, end_state, trace):
 		return
 
 	while queue:
-		initial = queue.pop()
-		trace.add(make_tuple(initial))
+		initial = queue.pop(0)
+
+        if initial == end_state: 
+            print("All disks removed", initial)
+            sys.exit()
+
 		possible_end_states = get_possible_end_states(initial)
-		for state in possible_end_states:
-			states = enqueue(states, state)
-	#If these moves were not visited, we add these states to visited(trace) and add them to queue
-	# for state in possible_end_states: 
-	#   	if make_tuple(state) not in trace:
-	# 		trace.add(make_tuple(state))
-	# 		queue = enqueue(states, state)
-	# 		print("queue",queue)
+
+		for state in possible_end_states:   
+	    #If these moves were not visited, 
+        #we add these states to visited(trace) and add them to queue
+	    # for state in possible_end_states: 
+	  	    if make_tuple(state) not in trace:
+                trace.add(make_tuple(state))
+                queue.append(state)
+
+        print("queue",queue)
+
 
 
 
