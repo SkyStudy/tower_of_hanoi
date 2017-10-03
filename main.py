@@ -17,6 +17,7 @@ def main():
     tower4 = [[],[1,2,3],[]]
     tower5 = [[1],[2],[3]]
     tower6 = [[3],[1,2],[]]
+    tower7 = [[1,2,3],[],[]]
 
     end_tower = [[],[],[1,2,3]]
     end_state = State([[0,0,0],[0,0,0],[1,2,3]])
@@ -26,8 +27,8 @@ def main():
     trace3 = set()
 
     # bfs(tower, end_tower, trace)
-    best_first_search(state, end_state, trace2)
-    # dfs(tower, end_tower, trace3, 0, 1)
+    # best_first_search(state, end_state, trace2)
+    dfs(tower7, end_tower, trace3, 0, 1)
 
 
 main()

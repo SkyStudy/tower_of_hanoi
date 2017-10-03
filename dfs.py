@@ -23,10 +23,18 @@ def dfs(current_state, end_state, trace, level, count):
             trace.add(make_tuple(state))
 
             temp_count = count
-            count += dfs(state, end_state, trace, level+1, count+1)
+            temp_level = level
+
+            # add count for child nodes visited
+            count += dfs(state, end_state, trace, temp_level+1, count+1)
+
+            # in child nodes, count from parent nodes are double counted
+            # when passed as argument of recursion function    
             count -= temp_count
+
+            # increment count when we move to next child(in same level)
             count += 1
-            
+
             print "level", level
             # printing current_state
             # for case when we go back to parent state
