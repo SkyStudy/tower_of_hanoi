@@ -9,34 +9,32 @@ def make_tuple(state):
 
 states = [[[1,2],[3],[]],[[1,2],[3],[]]]
 
-def make_tuple_3d(states):
-    a = set()
-    for state in states:
-        a.add(make_tuple(state))
-    return a
-
-def dfs(current_state, end_state, trace, level):
+def dfs(current_state, end_state, trace, level, count):
     print "level", level
     print "State: ", current_state
 
     if current_state == end_state:
         print "All disks moved"
+        print count
         sys.exit()
 
     possible_end_states = get_possible_end_states(current_state)
-    if make_tuple_3d(possible_end_states).intersection(trace) == make_tuple_3d(possible_end_states):
-        return
 
     for state in possible_end_states:
         if make_tuple(state) not in trace:
             trace.add(make_tuple(state))
-            dfs(state, end_state, trace, level+1)
+
+            temp_count = count
+            count += dfs(state, end_state, trace, level+1, count+1)
+            count -= temp_count
+            count += 1
+            
             print "level", level
             print "State: ", current_state
         else:
             continue
 
-    return             
+    return count             
 
 def get_possible_end_states(current_state):
     possible_end_states = []
@@ -88,11 +86,7 @@ def main():
     end_state = [[],[],[1,2,3]]
     trace = set()
     trace.add(make_tuple(current_state))
-
-    dfs(current_state, end_state, trace, 1)
-
-def num_steps():
-    return
+    dfs(current_state, end_state, trace, 1, 1)
 
 main()
 

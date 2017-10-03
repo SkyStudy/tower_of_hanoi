@@ -7,12 +7,6 @@ def make_tuple(state):
         a = a + (tuple(tower),)
     return a
 
-def make_tuple_3d(states):
-    a = set()
-    for state in states:
-        a.add(make_tuple(state))
-    return a
-
 def get_possible_end_states(current_state):
     possible_end_states = []
 
@@ -28,36 +22,28 @@ def get_possible_end_states(current_state):
     return possible_end_states
 
 def bfs(current_state, end_state, trace):
-	queue = []
-	queue.append(current_state)
-
-	#retrieve all possible moves 
-	possible_end_states = get_possible_end_states(current_state)
-
-	#checks if those moves were visited before
-	if make_tuple_3d(possible_end_states).intersection(trace) == make_tuple_3d(possible_end_states):
-		return
-
-	while queue:
-		initial = queue.pop(0)
+    queue = []
+    queue.append(current_state)
+    trace.add(make_tuple(current_state))
+    node_visited_count = 0
+    while queue:
+        initial = queue.pop(0)
+        node_visited_count+= 1
+        print('Number of nodes visited: ' + str(node_visited_count))
 
         if initial == end_state: 
             print("All disks removed", initial)
             sys.exit()
 
-		possible_end_states = get_possible_end_states(initial)
+        possible_end_states = get_possible_end_states(initial)
 
-		for state in possible_end_states:   
-	    #If these moves were not visited, 
-        #we add these states to visited(trace) and add them to queue
-	    # for state in possible_end_states: 
-	  	    if make_tuple(state) not in trace:
+        for state in possible_end_states:   
+            # If these moves were not visited, 
+            # we add these states to visited(trace) and add them to queue
+            if make_tuple(state) not in trace:
                 trace.add(make_tuple(state))
                 queue.append(state)
-
-        print("queue",queue)
-
-
+        print ("queue: ",queue)
 
 
 # check if disk at top of from tower can move to to tower
