@@ -1,6 +1,6 @@
 import copy
 import sys
-import dfs_bfs_util
+from dfs_bfs_util import *
 
 def dfs(current_state, end_state, trace, level, count):
     """ Depth First Search

@@ -1,6 +1,10 @@
+import copy
+
 def make_tuple(state):
-    """Make Tuple for given state
-       [[][][]] -> (()()()) 
+    """
+        Make Tuple for given state
+            - ex) [[][][]] -> (()()()) 
+            @param: state (State)
     """
     a = ()
     for tower in state: 
@@ -8,24 +12,32 @@ def make_tuple(state):
     return a
 
 def can_move(from_t, to_t):
-    """Check if disk at top of from tower can move to to tower
-       from_t (List) - tower from which disk move
-       to_t (List) - tower to which disk move 
-       returns boolean 
     """
+        Check if disk at top of from tower can move to to tower
+            @param: from_t (List) - tower from which disk move
+            @param: to_t (List) - tower to which disk move 
+            returns boolean 
+    """
+
+    # if from tower is empty
     if not from_t:
         return False
 
-    # 1. if to_tower is empty
-    # 2. if disk to move is smaller
+    # if disk to move is smaller
     if not to_t or from_t[0] < to_t[0]:
         return True
 
     return False
 
+
 def move(from_num, to_num, current_state):
-    """Move disk from tower to tower 
-       after checking if move is possible()
+    """
+        Move disk from tower to tower 
+        after checking if move is possible()
+            @param: from_num (Number)
+            @param: to_num (Number)
+            @param: current_state (2d list)
+            return state(2d list)
     """
     if can_move(current_state[from_num], current_state[to_num]) == False:
         return
@@ -37,8 +49,11 @@ def move(from_num, to_num, current_state):
     return end_state
 
 def get_possible_end_states(state):
-    """ Get possible end states given state
+    """ 
+        Get possible end states for given state
         - check 6 possible future states (2 states for each peg)
+        - if future state is already in trace(visted before),
+          we exclude it
     """
     possible_end_states = []
 

@@ -1,12 +1,13 @@
-from state import State
-import copy
 import sys
 import math
-import best_first_util
+from state import *
+from best_first_util import *
 
-
-# Returns heuristic distance (Euclidean) from current state to end state
 def calc_h(current_state, end_state):
+    """
+       Returns heuristic distance (Euclidean) 
+       from current state to end state
+    """
     current_array = current_state.towers
     end_array = end_state.towers
     cum = 0
@@ -16,7 +17,11 @@ def calc_h(current_state, end_state):
     heu_dist = math.sqrt(cum)
     return heu_dist
 
+
 def best_first_search(initial_state, end_state, trace):
+    """
+        Best first search         
+    """
     prqueue = []
     prqueue.append(initial_state)
     trace.add(make_state_tuple(initial_state))
