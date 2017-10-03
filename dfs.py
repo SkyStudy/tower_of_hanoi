@@ -30,6 +30,8 @@ def dfs(current_state, end_state, trace, level, count):
             count += 1
             
             print "level", level
+            # printing current_state
+            # for case when we go back to parent state
             print "State: ", current_state
         else:
             continue
@@ -82,7 +84,7 @@ some_state1 = [[],[3],[1,2]]
 
 
 def main(): 
-    current_state = [[1,2,3],[],[]]
+    current_state = [[2],[1],[3]]
     end_state = [[],[],[1,2,3]]
     trace = set()
     trace.add(make_tuple(current_state))

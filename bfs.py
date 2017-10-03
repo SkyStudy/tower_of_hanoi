@@ -72,7 +72,7 @@ def move(from_num, to_num, current_state):
     return end_state
 
 def main(): 
-    current_state = [[1,2,3],[],[]]
+    current_state = [[2,3],[1],[]]
     end_state = [[],[],[1,2,3]]
     queue = []
     states = []

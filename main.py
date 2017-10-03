@@ -1,34 +1,29 @@
 from state import State
+import bfs
+import dfs
+import best_first_search
 import sys
 
 def main():
     state = State([[1,2,0],[0,0,3],[0,0,0]])
-    #state2 = State([[1,2,0],[0,0,3],[0,0,0]])
-    state3 = State([[1,2,0],[0,0,3],[0,0,0]])
-    state4 = State([[1,2,0],[0,0,3],[0,0,0]])
-    #state5 = State([[0,0,0],[0,0,0],[0,0,0]])
-    state6 = State([[0,0,0],[0,0,0],[0,0,0]])
+    state2 = State([[1,0,0],[0,2,3],[0,0,0]])
+    state3 = State([[0,2,0],[0,0,3],[1,0,0]])
+    state4 = State([[0,0,0],[1,2,3],[0,0,0]])
+    state5 = State([[1,0,0],[0,2,0],[0,0,3]])
+    state6 = State([[0,0,3],[1,2,0],[0,0,0]])
 
-    state1 = State([[0,0,0],[0,0,0],[0,0,0]])
+    tower = [[1,2],[3],[]]
+    tower2 = [[1],[2,3],[]]
+    tower3 = [[2],[3],[1]]
+    tower4 = [[],[1,2,3],[]]
+    tower5 = [[1],[2],[3]]
+    tower6 = [[3],[1,2],[]]
 
-    new_state = state.get_next_state(1,2)
-    #new_state2 = state2.get_next_state(1,0)
-    new_state3 = state3.get_next_state(0,2)
-    new_state4 = state4.get_next_state(0,1)
-    #new_state5 = state5.get_next_state(1,0)
-    #new_state6 = state6.get_next_state(1,2)
-    print("state", state.towers)
-    print new_state.towers
-    #print("state", state.towers)
-    #print new_state2.towers
-    print("state", state.towers)
-    print new_state3.towers
-    print("state", state.towers)
-    print new_state4.towers
-    #print("state", state1.towers)
-    #print new_state5.towers
-    #print("state", state1.towers)
-    #print new_state6.towers
+    end_tower = [[],[],[1,2,3]]
+    end_state = State([[0,0,0],[0,0,0],[1,2,3]])
+
+    trace = set()
+
 
 
 main()
