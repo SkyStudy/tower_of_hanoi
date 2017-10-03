@@ -46,49 +46,51 @@ def calc_h(current_state, end_state):
     heu_dist = math.sqrt(cum)
     return heu_dist
 
-def best_first_search(current_state, end_state, trace):
+def best_first_search(initial_state, end_state, trace):
     prqueue = []
-    prqueue.append(current_state)
-    trace.add(make_tuple(current_state))
+    prqueue.append(initial_state)
+    trace.add(make_tuple(initial_state))
     node_visited_count = 0
+
     while prqueue:
-        initial = prqueue.pop(0)
+        current = prqueue.pop(0)
+        print "Current", current.towers
         node_visited_count+= 1
         print('Number of nodes visited: ' + str(node_visited_count))
 
-        if initial.towers == end_state.towers: 
-            print("All disks removed", initial)
+        if current.towers == end_state.towers: 
+            print("All disks removed", current)
             sys.exit()
 
-        possible_end_states = get_possible_end_states(initial)
-        possible_end_states = sort_by_cost(possible_end_states, end_state)
+        possible_end_states = get_possible_end_states(current)
 
-
-        for state in possible_end_states:   
+        for state in possible_end_states:
             # If these moves were not visited, 
             # we add these states to visited(trace) and add them to queue
             if make_tuple(state) not in trace:
                 trace.add(make_tuple(state))
                 prqueue.append(state)
-        print ("queue: ",prqueue)
 
-def sort_by_cost(states, end_state):
-    for state in states:
-        state.cost = calc_h(state, end_state)
+            # calc g
+            state.cost += 1
+            # calc h
+            state.cost += calc_h(state, end_state)
+        
+        prqueue.sort(key=lambda state: state.cost)
 
-    sorted_states = states.sort(key=lambda state: state.cost)
+        a = "Prqueue: "
+        for element in prqueue:
+            a += str(element.towers) + ", "
 
-    return sorted_states
+        print a
+        #print ("prqueue: ", prqueue)
+
 
 def main(): 
-    current_state = [[1,2,3],[0,0,0],[]]
-    end_state = [[],[],[1,2,3]]
-    queue = []
-    states = []
+    current_state = State([[1,2,3],[0,0,0],[0,0,0]])
+    end_state = State([[0,0,0],[0,0,0],[1,2,3]])
     trace = set()
-    trace.add(make_tuple(current_state))
-
-    bfs(current_state, end_state, trace)
+    best_first_search(current_state, end_state, trace)
 
 
-# main()
+main()
