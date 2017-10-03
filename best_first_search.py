@@ -85,12 +85,3 @@ def best_first_search(initial_state, end_state, trace):
         print a
         #print ("prqueue: ", prqueue)
 
-
-def main(): 
-    current_state = State([[0,2,3],[0,0,0],[1,0,0]])
-    end_state = State([[0,0,0],[0,0,0],[1,2,3]])
-    trace = set()
-    best_first_search(current_state, end_state, trace)
-
-
-main()

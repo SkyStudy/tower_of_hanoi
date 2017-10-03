@@ -71,17 +71,3 @@ def move(from_num, to_num, current_state):
     end_state = temp_state
     return end_state
 
-def main(): 
-    current_state = [[2,3],[1],[]]
-    end_state = [[],[],[1,2,3]]
-    queue = []
-    states = []
-    trace = set()
-    trace.add(make_tuple(current_state))
-
-    bfs(current_state, end_state, trace)
-
-def num_steps():
-    return
-
-main()

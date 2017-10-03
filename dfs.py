@@ -2,14 +2,20 @@ import copy
 import sys
 
 def make_tuple(state):
+    """Make Tuple for given state
+       [[][][]] -> (()()()) 
+    """
     a = ()
     for tower in state: 
         a = a + (tuple(tower),)
     return a
 
-states = [[[1,2],[3],[]],[[1,2],[3],[]]]
-
 def dfs(current_state, end_state, trace, level, count):
+    """ Depth First Search
+        given current state and end state
+        level - keeps track of recursion level
+        count - number of nodes visited
+    """
     print "level", level
     print "State: ", current_state
 
@@ -38,26 +44,29 @@ def dfs(current_state, end_state, trace, level, count):
 
     return count             
 
-def get_possible_end_states(current_state):
+def get_possible_end_states(state):
+    """ Get possible end states given state
+        - check 6 possible future states (2 states for each peg)
+    """
     possible_end_states = []
 
     for i in range(0,3):
         for j in range(0,3):
             if i==j:
                 continue
-            possible_end_state = move(i,j,current_state)
+            possible_end_state = move(i,j,state)
 
             if possible_end_state != None:
                 possible_end_states.append(possible_end_state)
 
     return possible_end_states
 
-
-# check if disk at top of from tower can move to to tower
-# from_t (List) - tower from which disk move
-# to_t (List) - tower to which disk move 
-# returns boolean 
 def can_move(from_t, to_t):
+    """Check if disk at top of from tower can move to to tower
+       from_t (List) - tower from which disk move
+       to_t (List) - tower to which disk move 
+       returns boolean 
+    """
     if not from_t:
         return False
 
@@ -69,6 +78,9 @@ def can_move(from_t, to_t):
     return False
 
 def move(from_num, to_num, current_state):
+    """Move disk from tower to tower 
+       after checking if move is possible()
+    """
     if can_move(current_state[from_num], current_state[to_num]) == False:
         return
 
@@ -78,19 +90,6 @@ def move(from_num, to_num, current_state):
     end_state = temp_state
     return end_state
 
-current_state = [[1,2,3], [], []]
-some_state = [[1,2],[3],[]]
-some_state1 = [[],[3],[1,2]]
-
-
-def main(): 
-    current_state = [[2],[1],[3]]
-    end_state = [[],[],[1,2,3]]
-    trace = set()
-    trace.add(make_tuple(current_state))
-    dfs(current_state, end_state, trace, 1, 1)
-
-main()
 
 
 
