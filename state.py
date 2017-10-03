@@ -7,6 +7,7 @@ class State:
         # towers = 2d array of size 3
         # [[],[],[]]
         self.towers = towers
+        self.cost = 0
 
     def can_move(self, from_index, to_index):
         from_tower = self.towers[from_index]
