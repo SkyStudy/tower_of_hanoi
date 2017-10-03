@@ -1,25 +1,6 @@
 import copy
 import sys
-
-def make_tuple(state):
-    a = ()
-    for tower in state: 
-        a = a + (tuple(tower),)
-    return a
-
-def get_possible_end_states(current_state):
-    possible_end_states = []
-
-    for i in range(0,3):
-        for j in range(0,3):
-            if i==j:
-                continue
-            possible_end_state = move(i,j,current_state)
-
-            if possible_end_state != None:
-                possible_end_states.append(possible_end_state)
-
-    return possible_end_states
+import dfs_bfs_util
 
 def bfs(current_state, end_state, trace):
     queue = []

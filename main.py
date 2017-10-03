@@ -2,7 +2,6 @@ from state import State
 import bfs
 import dfs
 import best_first_search
-import sys
 
 def main():
     state = State([[1,2,0],[0,0,3],[0,0,0]])

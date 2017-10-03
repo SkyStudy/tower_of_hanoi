@@ -1,41 +1,11 @@
+from state import State
 import copy
 import sys
 import math
-from state import State
+import best_first_util
 
 
-# Make Tuple out of State 
-# - this is for pushing 
-# @param - state (State)
-# @return - a (Tuple)
-def make_tuple(state):
-    a = ()
-    for tower in state.towers: 
-        a = a + (tuple(tower),)
-    return a
-
-# Get possible end states fron current state
-# @param - current_state (State)
-# @return - possible_end_states (State[])
-def get_possible_end_states(current_state):
-    possible_end_states = []
-
-    for i in range(0,3):
-        for j in range(0,3):
-            if i==j:
-                continue
-            possible_end_state = current_state.get_next_state(i,j)
-
-            if possible_end_state != None:
-                possible_end_states.append(possible_end_state)
-
-    return possible_end_states
-
-# def calc_cost():
-#     cost = calc_g() + calc_h()
-#     return cost
-
-# Returns heuristic distance from current state to end state
+# Returns heuristic distance (Euclidean) from current state to end state
 def calc_h(current_state, end_state):
     current_array = current_state.towers
     end_array = end_state.towers
@@ -49,7 +19,7 @@ def calc_h(current_state, end_state):
 def best_first_search(initial_state, end_state, trace):
     prqueue = []
     prqueue.append(initial_state)
-    trace.add(make_tuple(initial_state))
+    trace.add(make_state_tuple(initial_state))
     node_visited_count = 0
 
     while prqueue:
@@ -67,8 +37,8 @@ def best_first_search(initial_state, end_state, trace):
         for state in possible_end_states:
             # If these moves were not visited, 
             # we add these states to visited(trace) and add them to queue
-            if make_tuple(state) not in trace:
-                trace.add(make_tuple(state))
+            if make_state_tuple(state) not in trace:
+                trace.add(make_state_tuple(state))
                 prqueue.append(state)
 
             # calc g
