@@ -1,6 +1,7 @@
 import copy
 import sys
-from dfs_bfs_util import *
+from state import *
+from util import *
 
 def dfs(current_state, end_state, trace, level, count):
     """ Depth First Search
@@ -9,9 +10,9 @@ def dfs(current_state, end_state, trace, level, count):
         count - number of nodes visited
     """
     print "level", level
-    print "State: ", current_state
+    print "State: ", current_state.towers
 
-    if current_state == end_state:
+    if current_state.towers == end_state.towers:
         print "All disks moved"
         print count
         sys.exit()
@@ -19,8 +20,8 @@ def dfs(current_state, end_state, trace, level, count):
     possible_end_states = get_possible_end_states(current_state)
 
     for state in possible_end_states:
-        if make_tuple(state) not in trace:
-            trace.add(make_tuple(state))
+        if make_state_tuple(state) not in trace:
+            trace.add(make_state_tuple(state))
 
             temp_count = count
             temp_level = level
@@ -38,7 +39,7 @@ def dfs(current_state, end_state, trace, level, count):
             print "level", level
             # printing current_state
             # for case when we go back to parent state
-            print "State: ", current_state
+            print "State: ", current_state.towers
         else:
             continue
 

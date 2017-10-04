@@ -1,7 +1,7 @@
 import sys
 import math
 from state import *
-from best_first_util import *
+from util import *
 
 def calc_h(current_state, end_state):
     """
