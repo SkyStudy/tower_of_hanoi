@@ -14,7 +14,7 @@ def dfs(current_state, end_state, trace, level, count):
 
     if current_state.towers == end_state.towers:
         print "All disks moved"
-        print count
+        print "Number of steps: " + str(count)
         sys.exit()
 
     possible_end_states = get_possible_end_states(current_state)

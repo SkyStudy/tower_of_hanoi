@@ -27,7 +27,6 @@ def bfs(current_state, end_state, trace):
                 trace.add(make_state_tuple(state))
                 state.parent = current
                 queue.append(state)
-        print ("queue: ",queue)
 
-
+        print_queue(queue)
 

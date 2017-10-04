@@ -16,9 +16,9 @@ def main():
     trace2 = set()
     trace3 = set()
 
-    # bfs(state, end_state, trace)
+    bfs(state, end_state, trace)
     # best_first_search(state, end_state, trace2)
-    dfs(state, end_state, trace3, 0, 1)
+    # dfs(state, end_state, trace3, 0, 1)
 
 
 main()
