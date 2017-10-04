@@ -26,16 +26,28 @@ def best_first_search(initial_state, end_state, trace):
     prqueue.append(initial_state)
     trace.add(make_state_tuple(initial_state))
     node_visited_count = 0
+    visited = []
 
     while prqueue:
         current = prqueue.pop(0)
-        print "Current", current.towers
-        node_visited_count+= 1
-        print('Number of nodes visited: ' + str(node_visited_count))
+        visited.append(current)
+        node_visited_count += 1
 
         if current.towers == end_state.towers: 
-            print "All disks removed"
-            print_trace(current)
+            print
+            print "We have reached end state!!"
+            print
+            print 'Number of nodes visited in search: ' + str(node_visited_count)
+            print " - number of nodes in best first search"
+            print " - this is not equal to number of nodes in optimal path"
+            print 
+            print "Nodes visited in search: "
+            print
+            print_visited(visited)
+            print
+            print "Optimal path"
+            print 
+            print_optimal_path(current)
             sys.exit()
 
         possible_end_states = get_possible_end_states(current)
@@ -60,5 +72,4 @@ def best_first_search(initial_state, end_state, trace):
             a += str(element.towers) + ", "
 
         print a
-        #print ("prqueue: ", prqueue)
 

@@ -13,8 +13,12 @@ def dfs(current_state, end_state, trace, level, count):
     print "State: ", current_state.towers
 
     if current_state.towers == end_state.towers:
-        print "All disks moved"
-        print "Number of steps: " + str(count)
+        print
+        print "We have reached end state!!"
+        print
+        print 'Number of nodes visited in search: ' + str(count)
+        print " - number of nodes visited in depth first search"
+        print
         sys.exit()
 
     possible_end_states = get_possible_end_states(current_state)
@@ -22,7 +26,6 @@ def dfs(current_state, end_state, trace, level, count):
     for state in possible_end_states:
         if make_state_tuple(state) not in trace:
             trace.add(make_state_tuple(state))
-
             temp_count = count
             temp_level = level
 

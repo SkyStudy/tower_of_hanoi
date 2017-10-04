@@ -1,4 +1,21 @@
-def print_trace(state):
+def print_visited(visited):
+    result = ""
+
+    for e in visited: 
+        result += str(e.towers) + " -> "
+
+    print result
+
+def print_queue(queue):
+    result = ""
+
+    for e in queue: 
+        result += str(e.towers) + " ,"
+
+    print "Queue: " + "[ " + result +  " ]"
+
+def print_optimal_path(state):
+    result = ""
     path = []
 
     while state:
@@ -6,7 +23,9 @@ def print_trace(state):
         state = state.parent
 
     for e in path:
-        print str(e) + "->"
+        result += str(e) + " -> "
+
+    print "Start: " + result + " End"
 
 def make_state_tuple(state):
     """
