@@ -1,5 +1,15 @@
 import copy
 
+def print_path(state):
+    path = []
+
+    while state:
+        path.insert(0, state)
+        state = state.parent
+
+    for e in path:
+        print str(e) + "->"
+
 def make_tuple(state):
     """
         Make Tuple for given state

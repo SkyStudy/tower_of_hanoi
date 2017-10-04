@@ -26,8 +26,8 @@ def main():
     trace2 = set()
     trace3 = set()
 
-    # bfs(tower, end_tower, trace)
-    best_first_search(state, end_state, trace2)
+    bfs(tower, end_tower, trace)
+    # best_first_search(state, end_state, trace2)
     # dfs(tower7, end_tower, trace3, 0, 1)
 
 
