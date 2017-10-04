@@ -1,3 +1,13 @@
+def print_trace(state):
+    path = []
+
+    while state:
+        path.insert(0, state.towers)
+        state = state.parent
+
+    for e in path:
+        print str(e) + "->"
+
 def make_state_tuple(state):
     """
         Make Tuple out of State 
@@ -27,3 +37,4 @@ def get_possible_end_states(current_state):
                 possible_end_states.append(possible_end_state)
 
     return possible_end_states
+

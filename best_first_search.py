@@ -34,7 +34,8 @@ def best_first_search(initial_state, end_state, trace):
         print('Number of nodes visited: ' + str(node_visited_count))
 
         if current.towers == end_state.towers: 
-            print("All disks removed", current)
+            print "All disks removed"
+            print_trace(current)
             sys.exit()
 
         possible_end_states = get_possible_end_states(current)
@@ -44,6 +45,7 @@ def best_first_search(initial_state, end_state, trace):
             # we add these states to visited(trace) and add them to queue
             if make_state_tuple(state) not in trace:
                 trace.add(make_state_tuple(state))
+                state.parent = current
                 prqueue.append(state)
 
             # calc g
