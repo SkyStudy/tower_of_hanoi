@@ -46,8 +46,8 @@ def get_possible_end_states(current_state):
     """
     possible_end_states = []
 
-    for i in range(0,3):
-        for j in range(0,3):
+    for i in range(0,4):
+        for j in range(0,4):
             if i==j:
                 continue
             possible_end_state = current_state.get_next_state(i,j)
